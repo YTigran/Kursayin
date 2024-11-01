@@ -11,14 +11,20 @@ void my_scanf(const char* msg, int* val) {
 		if (msg)
 			printf("%s", msg);
 		res = scanf("%d", val);
+		if (*val < 0)
+		{
+			printf("The number must non-negative, try again\n");
+			while (getchar() != '\n')
+				continue;
+		}
 		if (res != 1) {
 			printf("Invalid input, try again\n");
 			while (getchar() != '\n');
 				continue;
     	}
-	} while (res != 1);
-	while (getchar() != '\n');
-		;
+	} while (res != 1 || *val < 0);
+	while (getchar() != '\n')
+		continue;
 }
 
 void input_arr(int* target, int* size) {

@@ -88,10 +88,8 @@ section .bss
 
 section .text
     extern printf
-    extern atoi
     extern my_scanf
     global main
-
 ; --------------------------------- main --------------------------
 
 main:
@@ -141,8 +139,11 @@ l_loop_start:
 
     cmp rbx, 1 ; check if index > 1
     jl l_loop_inc
-    mov r10, qword[arr + rbx * 8]
-    cmp r10, qword[arr + (rbx - 1) * 8] ; check if arr[i] > arr[i - 1]
+    
+    mov r10, [arr + rbx * 8] ; getting arr[i]
+    mov r11, [arr + (rbx - 1) * 8]
+
+    cmp r10, r11 ; check if arr[i] > arr[i - 1]
     jge l_loop_inc
     PRINT_STRING input_val_err, 48
     NEWLINE
